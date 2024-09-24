@@ -54,4 +54,4 @@ pnpx sequelize-cli db:seed:all
 - untuk melakukan seed data
 
 
-![diagram](/server/docs/ERD.png)
+![diagram](/erd.png)

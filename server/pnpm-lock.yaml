@@ -29,13 +29,13 @@ importers:
       sequelize:
         specifier: ^6.37.3
         version: 6.37.3(pg@8.13.0)
+      sequelize-cli:
+        specifier: ^6.6.2
+        version: 6.6.2
     devDependencies:
       nodemon:
         specifier: ^3.1.7
         version: 3.1.7
-      sequelize-cli:
-        specifier: ^6.6.2
-        version: 6.6.2
 
 packages:
 
