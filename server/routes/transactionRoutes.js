@@ -12,7 +12,7 @@ transactionRouter.get(
 transactionRouter.get(
     "/customers/:merchantId",
     authMiddleware,
-    transactionController.getCustomersByMerchant
+    transactionController.getMerchantCustomers
 );
 
 transactionRouter.post(

@@ -12,7 +12,8 @@ class TransactionController {
                     {
                         model: Product
                     }
-                ]});
+                ]
+            });
             res.status(200).json(transactions);
         } catch (error) {
             res.status(500).json({ error });
@@ -20,7 +21,7 @@ class TransactionController {
         }
     }
     // Get list of customers who bought products from this merchant
-    static async getCustomersByMerchant(req, res) {
+    static async getMerchantCustomers(req, res) {
         try {
             const { merchantId } = req.params;
 
@@ -34,20 +35,20 @@ class TransactionController {
                     {
                         model: Product,
                         where: { merchantId },
-                        attributes: [] // Kita tidak perlu data produk
+                        attributes: [] // Tidak perlu data produk
                     }
                 ],
-                group: ['User.id'] // Agar tidak duplikasi jika ada beberapa transaksi dari customer yang sama
+                group: ['Transaction.id', 'User.id'] // Agar tidak duplikasi jika ada beberapa transaksi dari customer yang sama
             });
 
             res.status(200).json(customers);
         } catch (error) {
-            res.status(500).json({ error });
+            res.status(500).json(error.message)
             console.log(error);
         }
     }
 
-    static async create(req, res, next) {
+    static async create(req, res) {
         try {
             const { productId, userId } = req.body;
 
@@ -58,11 +59,10 @@ class TransactionController {
             if (!product || !user) {
                 return res.status(404).json({ message: "Product or User not found" });
             }
-            // res.send({ product, user });
 
             // Hitung total harga transaksi dan poin reward yang diperoleh
             const totalPrice = product.price;
-            const rewardPointsEarned = Math.floor(totalPrice / 10); // Contoh: dapatkan 1 poin untuk setiap 10 unit harga
+            const rewardPointsEarned = Math.floor(totalPrice / 10); // Todo: dapatkan 1 poin untuk setiap 10 unit harga
 
             // Buat transaksi
             const transaction = await Transaction.create({

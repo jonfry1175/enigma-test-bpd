@@ -1,4 +1,4 @@
-const { User, Role } = require('../models');
+const { User, Role, Transaction, Reedem, Product } = require('../models');
 const { encryptPassword, decryptPassword } = require('../helpers/bcrypt');
 const { tokenGenerator } = require('../helpers/jsonwebtoken');
 
@@ -6,7 +6,7 @@ class UserController {
     static async getAll(req, res) {
         try {
             const users = await User.findAll({
-                include: [Role]
+                include: [Role, Transaction, Reedem]
             });
             res.status(200).json(users);
         } catch (err) {
