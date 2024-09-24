@@ -21,6 +21,10 @@ git clone https://github.com/jonfry1175/enigma-test-bpd.git
 
 Navigate to the server directory:
 ```bash
+cd enigma-test-bpd/
+```
+
+```bash
 cd server
 ```
 
